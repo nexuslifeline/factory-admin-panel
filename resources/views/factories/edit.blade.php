@@ -51,11 +51,11 @@
                             </div>
                         </div>
 
-                        <div class="mt-6">
-                            <button type="submit" class="px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-white hover:bg-blue-600">
+                        <div class="flex items-center justify-end mt-4 space-x-4">
+                            <button type="submit" class="px-4 py-2 bg-purple-500 border border-transparent rounded-md font-semibold text-white hover:bg-purple-600">
                                 {{ __('Update Factory') }}
                             </button>
-                            <a href="{{ route('factories.index') }}" class="ml-4 px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-white hover:bg-gray-600">
+                            <a href="{{ route('factories.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md font-semibold text-gray-700 bg-white hover:bg-gray-50">
                                 {{ __('Cancel') }}
                             </a>
                         </div>
