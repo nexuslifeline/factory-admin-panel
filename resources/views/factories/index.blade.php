@@ -11,7 +11,7 @@
                 <form method="GET" action="{{ route('factories.index') }}">
                     <div class="flex items-center">
                         <input type="text" name="search" value="{{ request()->input('search') }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ __('Search factories...') }}">
-                        <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-white hover:bg-blue-600">
+                        <button type="submit" class="ml-4 px-4 py-2 border-2 border-purple-500 rounded-md font-semibold text-purple-500 hover:bg-purple-50">
                             {{ __('Search') }}
                         </button>
                     </div>
@@ -21,68 +21,81 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between items-center mb-4">
-                        <a href="{{ route('factories.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-white hover:bg-blue-600">
+                        <a href="{{ route('factories.create') }}" class="inline-flex items-center px-4 py-2 bg-purple-500 border border-transparent rounded-md font-semibold text-white hover:bg-purple-600">
                             {{ __('Create Factory') }}
                         </a>
                     </div>
 
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{ __('Name') }}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{ __('Location') }}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{ __('Email') }}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{ __('Website') }}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{ __('Actions') }}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse ($factories as $factory)
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
+                            <thead class="bg-gray-50">
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        {{ $factory->factory_name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $factory->location }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $factory->email ?? 'N/A' }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $factory->website ?? 'N/A' }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('factories.show', $factory->id) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('View') }}</a>
-                                        <a href="{{ route('factories.edit', $factory->id) }}" class="text-blue-600 hover:text-blue-900 ml-4">{{ __('Edit') }}</a>
-                                        <form action="{{ route('factories.destroy', $factory->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-4">{{ __('Delete') }}</button>
-                                        </form>
-                                    </td>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-300 w-1/3">
+                                        {{ __('Name') }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-300 w-1/4">
+                                        {{ __('Location') }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-300">
+                                        {{ __('Email') }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-300">
+                                        {{ __('Website') }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-300 w-24">
+                                        {{ __('Actions') }}
+                                    </th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
-                                        {{ __('No factories found.') }}
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @forelse ($factories as $factory)
+                                    <tr class="{{ $loop->odd ? 'bg-gray-100' : 'bg-white' }}">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-b border-gray-300">
+                                            {{ $factory->factory_name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-300">
+                                            {{ $factory->location }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-300">
+                                            {{ $factory->email ?? 'N/A' }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-300">
+                                            {{ $factory->website ?? 'N/A' }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium border-b border-gray-300 w-24">
+                                            <div x-data="{ open: false }" class="relative inline-block text-left">
+                                                <button @click="open = !open" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path d="M10 8a1 1 0 100-2 1 1 0 000 2zm4 1a1 1 0 100-2 1 1 0 000 2zm-8 0a1 1 0 100-2 1 1 0 000 2z"/>
+                                                    </svg>
+                                                </button>
+                                                <div x-show="open" @click.outside="open = false" class="absolute right-0 mt-2 w-48 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                    <div class="p-1">
+                                                        <a href="{{ route('factories.show', $factory->id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('View') }}</a>
+                                                        <a href="{{ route('factories.edit', $factory->id) }}" class="block px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">{{ __('Edit') }}</a>
+                                                        <form action="{{ route('factories.destroy', $factory->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-100">{{ __('Delete') }}</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                                            {{ __('No factories found.') }}
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="mt-4">
-                        {{ $factories->links() }}
+                        {{ $factories->links('pagination::tailwind') }}
                     </div>
                 </div>
             </div>
