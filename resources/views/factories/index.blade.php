@@ -7,26 +7,25 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8 p-6">
-                <form method="GET" action="{{ route('factories.index') }}">
-                    <div class="flex items-center">
-                        <input type="text" name="search" value="{{ request()->input('search') }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ __('Search factories...') }}">
-                        <button type="submit" class="ml-4 px-4 py-2 border-2 border-purple-500 rounded-md font-semibold text-purple-500 hover:bg-purple-50">
-                            {{ __('Search') }}
-                        </button>
-                    </div>
-                </form>
-            </div>
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8">
+            <div class="bg-white shadow-sm sm:rounded-lg mb-8">
                 <div class="p-6 text-gray-900">
+                    <form method="GET" action="{{ route('factories.index') }}" class="mb-4">
+                        <div class="flex items-center">
+                            <input type="text" name="search" value="{{ request()->input('search') }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="{{ __('Search factories...') }}">
+                            <button type="submit" class="ml-4 px-4 py-2 border-2 border-purple-500 rounded-md font-semibold text-purple-500 hover:bg-purple-50">
+                                {{ __('Search') }}
+                            </button>
+                        </div>
+                    </form>
+
                     <div class="flex justify-between items-center mb-4">
                         <a href="{{ route('factories.create') }}" class="inline-flex items-center px-4 py-2 bg-purple-500 border border-transparent rounded-md font-semibold text-white hover:bg-purple-600">
                             {{ __('Create Factory') }}
                         </a>
                     </div>
 
-                    <div class="overflow-x-auto">
+                    <div>
                         <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
                             <thead class="bg-gray-50">
                                 <tr>
